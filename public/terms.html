@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeonChat | Modern Messaging</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Light Theme */
+            --light-primary: #f0f4ff;
+            --light-secondary: #ffffff;
+            --light-accent: #6366f1;
+            --light-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --light-text: #1e293b;
+
+            /* Dark Theme */
+            --dark-primary: #0f172a;
+            --dark-secondary: #1e293b;
+            --dark-accent: #818cf8;
+            --dark-gradient: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+            --dark-text: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            transition: 0.3s all ease;
+        }
+
+        body {
+            background: var(--light-primary);
+            color: var(--light-text);
+            height: 100vh;
+        }
+
+        body.dark-mode {
+            background: var(--dark-primary);
+            color: var(--dark-text);
+        }
+
+        /* Navbar */
+        .neon-navbar {
+            height: 70px;
+            background: var(--light-secondary);
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .neon-navbar {
+            background: var(--dark-secondary);
+            box-shadow: 0 4px 6px -1px rgba(255, 255, 255, 0.1);
+        }
+
+        .neon-logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            background: var(--light-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.dark-mode .neon-logo {
+            background: var(--dark-gradient);
+        }
+
+        /* Theme Toggle */
+        .theme-switch {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            padding: 0.6rem 1.2rem;
+            border-radius: 2rem;
+            background: var(--light-secondary);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .theme-switch {
+            background: var(--dark-secondary);
+            box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Chat Container */
+        .neon-container {
+            display: flex;
+            height: calc(100vh - 70px);
+            padding: 1.5rem;
+            gap: 1.5rem;
+        }
+
+        /* Sidebar */
+        .neon-sidebar {
+            width: 300px;
+            background: var(--light-secondary);
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .neon-sidebar {
+            background: var(--dark-secondary);
+        }
+
+        /* Chat Window */
+        .neon-chat {
+            flex: 1;
+            background: var(--light-secondary);
+            border-radius: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .neon-chat {
+            background: var(--dark-secondary);
+        }
+
+        /* Message Bubbles */
+        .neon-message {
+            max-width: 70%;
+            padding: 1rem 1.2rem;
+            margin: 0.8rem;
+            border-radius: 1.2rem;
+            animation: floatUp 0.3s ease;
+        }
+
+        .received {
+            background: var(--light-primary);
+            align-self: flex-start;
+        }
+
+        .sent {
+            background: var(--light-gradient);
+            color: white;
+            align-self: flex-end;
+        }
+
+        body.dark-mode .received {
+            background: var(--dark-primary);
+        }
+
+        body.dark-mode .sent {
+            background: var(--dark-gradient);
+        }
+
+        /* Input Area */
+        .neon-input {
+            background: var(--light-primary);
+            border: none;
+            padding: 1.2rem;
+            border-radius: 1rem;
+            font-size: 1rem;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .neon-input {
+            background: var(--dark-primary);
+            color: var(--dark-text);
+        }
+
+        @keyframes floatUp {
+            from { opacity: 0; transform: translateY(1rem); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="neon-navbar">
+        <div class="neon-logo">NeonChat</div>
+        <div class="theme-switch" onclick="toggleTheme()">
+            <i class="material-icons">light_mode</i>
+            <span>Light Mode</span>
+        </div>
+    </nav>
+
+    <!-- Chat Container -->
+    <div class="neon-container">
+        <!-- Sidebar -->
+        <div class="neon-sidebar">
+            <!-- Contacts List -->
+        </div>
+
+        <!-- Chat Window -->
+        <div class="neon-chat">
+            <!-- Messages -->
+            <div class="neon-message received">
+                Hello! How are you today?
+            </div>
+            <div class="neon-message sent">
+                I'm great, thanks! 😊
+            </div>
+            
+            <!-- Input Area -->
+            <div class="neon-input-area">
+                <input type="text" class="neon-input" placeholder="Type your message...">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const themeIcon = document.querySelector('.theme-switch i');
+            const themeText = document.querySelector('.theme-switch span');
+            
+            if(document.body.classList.contains('dark-mode')) {
+                themeIcon.textContent = 'dark_mode';
+                themeText.textContent = 'Dark Mode';
+            } else {
+                themeIcon.textContent = 'light_mode';
+                themeText.textContent = 'Light Mode';
+            }
+        }
+    </script>
+</body>
+</html>

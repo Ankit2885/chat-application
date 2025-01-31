@@ -3,28 +3,87 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>i chat - realtime node socket.io chat app </title>
-    <script defer src="http://localhost:8000/socket.io/socket.io.js"></script>
+    <title>Socket.io Chat</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A real-time chat application using Socket.io and Node.js. Join rooms and chat with friends securely.">
+    <meta name="keywords" content="chat, real-time, socket.io, Node.js, chat application">
+    <meta name="author" content="Your Name">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Materialize CSS for Material Design -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/materialize-css@1.0.0/dist/css/materialize.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
-    <script defer src="js/index.js"></script>
+    
+    <!-- Open Graph meta tags -->
+    <meta property="og:title" content="Socket.io Chat">
+    <meta property="og:description" content="A real-time chat application with Socket.io and Node.js">
+    <meta property="og:image" content="path/to/image.jpg">
 </head>
 
 <body>
-    <nav>
-        <img class="logo" src="chat.jpg">
+    <!-- Navbar -->
+    <nav class="nav-extended teal">
+        <div class="nav-wrapper container">
+            <a href="#" class="brand-logo">
+                <img src="path_to_logo.png" alt="Logo" style="height: 50px;">
+            </a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Chat</a></li>
+                <li><a href="terms.html">Terms & Conditions</a></li>
+            </ul>
+        </div>
     </nav>
+
+    <!-- Chat Application Container -->
     <div class="container">
-        <!-- <div class="message right">Ankit: hy bro how are you</div>
-        <div class="message left">Atul: hy bro i am fine</div> -->
+        <div id="welcome-section" class="section">
+            <h3 class="center-align">Welcome to Real-Time Chat</h3>
+            <div class="input-field">
+                <input type="text" id="name" placeholder="Enter your name" required>
+                <label for="name">Your Name</label>
+            </div>
+            <button id="join-btn" class="btn-large waves-effect waves-light teal">Join Chat</button>
+        </div>
+
+        <div id="chat-section" class="section" style="display: none;">
+            <div id="chat-box" class="chat-box">
+                <!-- Messages will appear here -->
+            </div>
+            <div class="input-field">
+                <textarea id="message" class="materialize-textarea" placeholder="Type your message..."></textarea>
+                <label for="message">Message</label>
+            </div>
+            <button id="send-btn" class="btn-large waves-effect waves-light blue">Send</button>
+        </div>
     </div>
-    <div class="send">
-        <form action="#" id="send-container">
-            <input type="text" name="messageInp" id="messageInp">
-            <button class="btn" type="submit">Send</button>
-        </form>
+
+    <!-- Terms and Conditions Page Link -->
+    <footer class="page-footer teal">
+        <div class="container">
+            <a href="terms.html" class="white-text">Terms & Conditions</a>
+        </div>
+    </footer>
+
+    <!-- Terms and Conditions Page (hidden for now) -->
+    <div id="terms-modal" class="modal">
+        <div class="modal-content">
+            <h4>Terms & Conditions</h4>
+            <p>Your terms and conditions go here...</p>
+        </div>
     </div>
+
+    <!-- Socket.io Script -->
+    <script defer src="http://localhost:8000/socket.io/socket.io.js"></script>
+    <script defer src="js/index.js"></script>
+    
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 
 </html>

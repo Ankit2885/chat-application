@@ -1,40 +1,47 @@
-const socket = io('http://localhost:8000', { transports : ['websocket'] });
+const socket = io('http://localhost:8000', { transports: ['websocket'] });
 
-const from = document.getElementById('send-container');
-const messageInput = document.getElementById('messageInp');
-const messageContainer = document.querySelector(".container");
-var audio = new Audio('chatring.mp3');
+const joinBtn = document.getElementById('join-btn');
+const sendBtn = document.getElementById('send-btn');
+const nameInput = document.getElementById('name');
+const messageInput = document.getElementById('message');
+const chatBox = document.getElementById('chat-box');
+const welcomeSection = document.getElementById('welcome-section');
+const chatSection = document.getElementById('chat-section');
 
-const append = (message, position)=>{
-    const messageElement = document.createElement('div');
-    messageElement.innerHTML = message;
-    messageElement.classList.add('message'); 
-    messageElement.classList.add(position);
-    messageContainer.append(messageElement); 
-    if(position == 'left'){
-        audio.play(); 
+let roomId = null;
+
+joinBtn.addEventListener('click', () => {
+    const name = nameInput.value;
+    if (name) {
+        socket.emit('new-user-joined', name);
+        welcomeSection.style.display = 'none';
+        chatSection.style.display = 'block';
     }
-}
+});
 
-from.addEventListener('submit', (e)=>{
-    e.preventDefault();
+socket.on('joined-room', (room) => {
+    roomId = room;
+    chatBox.innerHTML += `<p class="info-message">You joined room: ${roomId}</p>`;
+});
+
+socket.on('user-joined', (name) => {
+    chatBox.innerHTML += `<p class="info-message">${name} joined the room.</p>`;
+});
+
+socket.on('receive', (data) => {
+    chatBox.innerHTML += `<p class="received-message"><strong>${data.name}:</strong> ${data.message}</p>`;
+});
+
+socket.on('leave', (name) => {
+    chatBox.innerHTML += `<p class="info-message">${name} left the room.</p>`;
+});
+
+sendBtn.addEventListener('click', () => {
     const message = messageInput.value;
-    append(`You: ${message}`, 'right');
-    socket.emit('send', message);
-    messageInput.value = "";
-})
-
-const name = prompt("Enter your name to join");
-socket.emit('new-user-joined', name);
-
-socket.on('user-joined', name=>{
-    append(`${name} joined the chat`, "right")
-})
-
-socket.on('receive', data=>{
-    append(`${data.name}: ${data.message}`, "left")
-})
-
-socket.on('leave', data=>{
-    append(`${name} left the chat`, "left")
-})
+    if (message && roomId) {
+        socket.emit('send', message);
+        messageInput.value = ''; // Clear the message input
+        chatBox.innerHTML += `<p class="sent-message"><strong>You:</strong> ${message}</p>`;
+        chatBox.scrollTop = chatBox.scrollHeight; // Auto scroll to bottom
+    }
+});
