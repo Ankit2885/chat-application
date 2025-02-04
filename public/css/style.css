@@ -1,3 +1,11 @@
+:root {
+  --button-1: #3498db;
+  --button-2: #086db1;
+  --primary-color: #3498db;
+  --bg-black: #000;
+  /* Example: Set the primary color to a shade of blue */
+}
+
 /* Base Styles */
 * {
   margin: 0;
@@ -5,35 +13,114 @@
   box-sizing: border-box;
 }
 
+html,
 body {
-  font-family: 'Roboto', sans-serif;
-  background-color: #f5f5f5;
+  height: 100%;
+  width: 100%;
+}
+
+.site-wrapper {
+  width: 100%;
+  height: 80%;
+  background-color: #00796b;
+}
+
+.site-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10%;
+  background-color: blue;
+  padding-inline: 37px;
+  padding-right: 45px;
+}
+
+.site-nav-tabs {
+  display: flex;
+  justify-content: space-evenly;
+  list-style-type: none;
+  gap: 23px;
   margin: 0;
-  padding-top: 60px; /* To avoid navbar overlap */
+}
+
+.site-nav-tabs li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.site-footer {
+  height: 10%;
+  background-color: blueviolet;
 }
 
 .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
   width: 100%;
-  max-width: 600px;
-  padding: 20px;
+}
+
+.site-link-btn span {
+  display: flex;
+  gap: 0.5rem;
+  z-index: 2;
+}
+
+.site-link-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 50px;
+  border: none;
+  border-radius: 8px;
+  padding: .55rem 1.25rem;
+  color: white;
+  overflow: hidden;
+  background: linear-gradient(90deg, var(--button-1) 0, var(--button-2) 100%)
+}
+
+.site-link-btn:hover {
+  height: 50px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+}
+
+
+.site-link-btn:hover:before {
+  left: 0;
+}
+
+.site-link-btn:before {
+  background: var(--button-2);
+  content: "";
+  height: 100%;
+  left: -100%;
+  position: absolute;
+  overflow: visible;
+  top: 0;
+  transition: all .5s ease;
+  width: 100%;
 }
 
 /* Navbar */
-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-}
-
 .nav-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.brand-logo img {
+.brand-logo {
   height: 50px;
+  width: 50px;
+  margin: 0px 33px;
+}
+
+.brand-logo img {
+  height: 100%;
+  width: 100%;
 }
 
 /* Chat Box */
@@ -49,7 +136,8 @@ nav {
 }
 
 /* Chat Sections */
-#welcome-section, #chat-section {
+#welcome-section,
+#chat-section {
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
@@ -63,7 +151,8 @@ nav {
 }
 
 /* Input Fields */
-.input-field input, .input-field textarea {
+.input-field input,
+.input-field textarea {
   font-size: 16px;
 }
 
